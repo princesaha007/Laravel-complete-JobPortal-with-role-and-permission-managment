@@ -4,7 +4,7 @@
 
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Roles / create') }}
+            {{ __('Roles / Edit') }}
         </h2>
 
         <a href="{{ route('roles.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md mb-4">Back</a>
@@ -20,12 +20,12 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <form value="{{old('name')}}" action="{{route('roles.store')}}" method="POST">
+                    <form value="{{old('name' )}}" action="{{route('roles.update' , $role->id)}}" method="POST">
                         @csrf
 	<div>
 		<label for="" class="text-1g font-medium">Name</label>
 		<div class="my-3">
-		<input name="name" placeholder="Enter Name" type="text" class="border-gray-300
+		<input value="{{old('name' ,  $role->name)}}"    name="name" placeholder="Enter Name" type="text" class="border-gray-300
 		shadow-sm w-1/2 rounded-1g">
 
 
@@ -37,11 +37,13 @@
 	</button>
         <div class="">
 
-@foreach($permissions as $permission)
-    <label class="inline-flex items-center mr-4">
-        <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" class="mr-2">
-        <span class="text-gray-700">{{ $permission->name }}</span>
-    </label>
+        @foreach($permissions as $permission)
+    <input type="checkbox"
+           name="permissions[]"
+           value="{{ $permission->name }}"
+           @if($ourHasPermissions->contains($permission->name)) checked @endif
+           class="mr-2">
+    <label class="text-gray-700">{{ $permission->name }}</label>
 @endforeach
 
         </div>

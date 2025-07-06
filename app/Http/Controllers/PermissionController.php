@@ -6,13 +6,29 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Validator;
+// use Illuminate\Routing\Controllers\HasMiddleware;
+// use Illuminate\Routing\Controllers\Middleware;
 
-class PermissionController extends Controller
+
+
+class PermissionController extends Controller 
 {
+
+    public function __construct()
+    {
+        $this->middleware('permission:view permissions')->only('index');
+        $this->middleware('permission:edit permissions')->only('edit', 'update');
+        $this->middleware('permission:create permissions')->only('create', 'store');
+        $this->middleware('permission:delete permissions')->only('destroy');
+    }
+
+
+
+
     //this method will show permission page 
     public function index()
     {
-        $permissions = Permission::orderBy('id', 'desc')->paginate(10);
+        $permissions = Permission::orderBy('id', 'desc')->get();
         return view('permissions.list', compact('permissions'));
     }
 
