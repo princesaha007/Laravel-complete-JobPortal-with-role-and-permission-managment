@@ -18,7 +18,7 @@
         @endcan
         
 
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-7">
 
             <div class="">
 

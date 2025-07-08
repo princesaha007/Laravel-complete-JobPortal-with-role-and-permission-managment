@@ -11,7 +11,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -53,6 +53,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
     Route::post('/users/update/{id}', [UserController::class, 'update'])->name('users.update');
     Route::get('/users/delete/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+    // Search Users
+    Route::get('/users/search', [UserController::class, 'search'])->name('users.search');
 });
 
 require __DIR__.'/auth.php';

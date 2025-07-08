@@ -66,7 +66,7 @@ class UserController extends Controller
 
         }else{
 
-            return redirect()->route('users.create' , $id)->withInput()->withErrors($validated);
+            return redirect()->route('users.create' )->withInput()->withErrors($validated);
 
 
         }
@@ -120,11 +120,6 @@ class UserController extends Controller
 
         }
 
-
-
-
-
-
     }
 
     /**
@@ -136,4 +131,27 @@ class UserController extends Controller
         $user-> delete();
         return redirect()->route('users.index')->with('success', 'users deleted successfully');
     }
+
+    /**
+     * Search users by name.
+     */
+public function search(Request $request)
+{
+    $search = $request->search;
+
+    if ($search) {
+        $users = User::where('name', 'LIKE', '%' . $search . '%')->paginate(5);
+
+        // If no results found
+        if ($users->isEmpty()) {
+            return redirect()->route('users.index')->with('error', 'No users found');
+        }
+
+        return view('users.list', compact('users'));
+    }
+
+    return redirect()->route('users.index')->with('error', 'Please enter a search term');
+}
+
+
 }

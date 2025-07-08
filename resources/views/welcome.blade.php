@@ -26,14 +26,14 @@
                     @auth
                         <a
                             href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
+                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#ffffff] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal bg-green-400"
                         >
                             Dashboard
                         </a>
                     @else
                         <a
                             href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-white border border-transparent hover:border-[#fdfcf935] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal bg-green-400"
                         >
                             Log in
                         </a>
@@ -41,7 +41,7 @@
                         @if (Route::has('register'))
                             <a
                                 href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
+                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-white dark:border-[#ffffff] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal bg-green-500">
                                 Register
                             </a>
                         @endif
@@ -51,6 +51,11 @@
         </header>
         <div>
             <!-- here can add body content -->
+            <div class="flex flex-col items-center justify-center">
+                <h1 class="text-3xl lg:text-5xl font-bold mb-4 text-center text-green-400">
+                    Welcome to Laravel Role Manager
+                </h1>
+                <p class="text-lg lg
         </div>
 
         @if (Route::has('login'))

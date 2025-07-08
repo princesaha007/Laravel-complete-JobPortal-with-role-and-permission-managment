@@ -3,21 +3,44 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Define permissions
+        $permissions = [
+            'view users', 'create users', 'edit users', 'delete users',
+            'view roles', 'create roles', 'edit roles', 'delete roles',
+            'view permissions', 'create permissions', 'edit permissions', 'delete permissions',
+            'view articles', 'create articles', 'edit articles', 'delete articles',
+            // Add more if needed
+        ];
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Create permissions
+        foreach ($permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        // Create role
+        $superAdminRole = Role::firstOrCreate(['name' => 'super-admin']);
+
+        // Assign all permissions to the role
+        $superAdminRole->syncPermissions(Permission::all());
+
+        // Create a super admin user
+        $user = User::firstOrCreate(
+            ['email' => 'superadmin@example.com'],
+            [
+                'name' => 'Super Admin',
+                'password' => bcrypt('123456789'), 
+            ]
+        );
+
+        // Assign role to user
+        $user->assignRole($superAdminRole);
     }
 }

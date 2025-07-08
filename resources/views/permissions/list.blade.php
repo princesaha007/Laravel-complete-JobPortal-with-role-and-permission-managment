@@ -21,7 +21,7 @@
         @endcan
 
        </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-7">
 <div class="">
 
     <div class="max-w-5xl mx-auto">

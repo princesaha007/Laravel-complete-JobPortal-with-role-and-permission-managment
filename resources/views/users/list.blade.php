@@ -16,6 +16,12 @@
         <!-- @can('create users') -->
         <a href="{{ route('users.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md mb-4">Create user</a>
         <!-- @endcan  -->
+
+        <form class="mt-5" action="{{ route('users.search') }}" method="GET">
+            <input type="search"  name="search" id="search" placeholder="Search users..." value="{{ request('search') }}" class="border border-gray-300 rounded-md px-4 py-2 mb-4 w-full max-w-md">
+            <input type="submit" value="Search" class="bg-blue-500 text-white px-4 py-2 rounded-md">
+        </form>
+
         
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
