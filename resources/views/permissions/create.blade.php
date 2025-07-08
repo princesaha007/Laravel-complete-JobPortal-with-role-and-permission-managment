@@ -20,7 +20,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <form value="{{old('name')}}" action="{{route('permissions.store')}}" method="POST">
+                    <form value="{{old('name')}}" action="{{route('pe  rmissions.store')}}" method="POST">
                         @csrf
 	<div>
 		<label for="" class="text-1g font-medium">Name</label>

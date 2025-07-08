@@ -17,10 +17,63 @@
         <a href="{{ route('users.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md mb-4">Create user</a>
         <!-- @endcan  -->
 
-        <form class="mt-5" action="{{ route('users.search') }}" method="GET">
-            <input type="search"  name="search" id="search" placeholder="Search users..." value="{{ request('search') }}" class="border border-gray-300 rounded-md px-4 py-2 mb-4 w-full max-w-md">
-            <input type="submit" value="Search" class="bg-blue-500 text-white px-4 py-2 rounded-md">
-        </form>
+        
+
+  <form class="mt-5" action="{{ route('users.search') }}" method="GET">
+    {{-- Name or keyword search --}}
+    <input
+        type="search"
+        name="search"
+        id="search"
+        placeholder="Search by name..."
+        value="{{ old('search', request('search')) }}"
+        class="border border-gray-300 rounded-md px-4 py-2 mb-4 w-full max-w-md"
+    >
+
+    {{-- Email filter --}}
+    <input
+        type="email"
+        name="email"
+        id="email"
+        placeholder="Email (optional)"
+        value="{{ old('email', request('email')) }}"
+        class="border border-gray-300 rounded-md px-4 py-2 mb-4 w-full max-w-md"
+    >
+
+    {{-- Role dropdown --}}
+    <select
+        name="role"
+        id="role"
+        class="border border-gray-300 rounded-md px-4 py-2 mb-4 w-full max-w-md"
+    >
+        <option value="">All Roles</option>
+        @foreach($roles as $role)
+            <option
+                value="{{ $role->name }}"
+                {{ request('role') == $role->name ? 'selected' : '' }}
+            >
+                {{ ucfirst($role->name) }}
+            </option>
+        @endforeach
+    </select>
+
+    <input
+        type="submit"
+        value="Search"
+        class="bg-blue-500 text-white px-4 py-2 rounded-md"
+    >
+</form>
+
+
+
+
+
+
+
+
+
+
+
 
         
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">

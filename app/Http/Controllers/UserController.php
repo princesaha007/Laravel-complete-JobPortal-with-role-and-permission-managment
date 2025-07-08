@@ -24,8 +24,9 @@ class UserController extends Controller
 
     public function index()
     {
+        $roles = Role::all();
         $users = User::latest()->paginate(10);
-        return view('users.list' , ['users' => $users]);
+        return view('users.list' , ['users' => $users, 'roles' => $roles]);
     }
 
 
@@ -138,19 +139,36 @@ class UserController extends Controller
 public function search(Request $request)
 {
     $search = $request->search;
+    $email = $request->email;
+    $roles = $request->role;
+
+    // Build query
+    $query = User::query();
 
     if ($search) {
-        $users = User::where('name', 'LIKE', '%' . $search . '%')->paginate(5);
-
-        // If no results found
-        if ($users->isEmpty()) {
-            return redirect()->route('users.index')->with('error', 'No users found');
-        }
-
-        return view('users.list', compact('users'));
+        $query->where('name', 'LIKE', '%' . $search . '%');
     }
 
-    return redirect()->route('users.index')->with('error', 'Please enter a search term');
+    if ($email) {
+        $query->where('email', 'LIKE', '%' . $email . '%');
+    }
+
+    if ($roles) {
+        $query->whereHas('roles', function ($q) use ($roles) {
+            $q->where('name', $roles);
+        });
+    }
+
+    // Get filtered users
+    $users = $query->paginate(5)->withQueryString();
+
+    if ($users->isEmpty()) {
+        return redirect()->route('users.index')->with('error', 'No users found');
+    }
+
+    $roles = Role::all(); // Needed for repopulating role dropdown
+
+    return view('users.list', compact('users', 'roles'));
 }
 
 
