@@ -138,33 +138,35 @@ class UserController extends Controller
      */
 public function search(Request $request)
 {
-    $search = $request->search;
+    $name = $request->name;
     $email = $request->email;
-    $roles = $request->role;
+    $role = $request->role;
 
-    // Build query
-    $query = User::query();
+        // Build query
+        $query = User::query();
 
-    if ($search) {
-        $query->where('name', 'LIKE', '%' . $search . '%');
-    }
+        if ($name) {
+            $query->where('name', 'LIKE', '%' . $name . '%');
+        }
 
-    if ($email) {
-        $query->where('email', 'LIKE', '%' . $email . '%');
-    }
+        if ($email) {
+            $query->where('email', 'LIKE', '%' . $email . '%');
+        }
 
-    if ($roles) {
-        $query->whereHas('roles', function ($q) use ($roles) {
-            $q->where('name', $roles);
-        });
-    }
+        if ($role) {
+            $query->whereHas('roles', function ($q) use ($role) {
+                $q->where('name', $role);
+            });
+        }
 
-    // Get filtered users
-    $users = $query->paginate(5)->withQueryString();
+        // Get filtered users
+        $users = $query->paginate(5)->withQueryString();
 
-    if ($users->isEmpty()) {
-        return redirect()->route('users.index')->with('error', 'No users found');
-    }
+        if ($users->isEmpty()) {
+            return redirect()->route('users.index')->with('error', 'No users found');
+        }
+    
+    // Repopulate roles for the dropdown
 
     $roles = Role::all(); // Needed for repopulating role dropdown
 

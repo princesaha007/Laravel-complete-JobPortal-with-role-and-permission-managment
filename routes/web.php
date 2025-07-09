@@ -7,6 +7,7 @@ use Spatie\Permission\Contracts\Permission;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CareerController;
 
 
 Route::get('/', function () {
@@ -56,6 +57,15 @@ Route::middleware('auth')->group(function () {
 
     // Search Users
     Route::get('/users/search', [UserController::class, 'search'])->name('users.search');
+
+    // Career Routes
+    Route::get('/careers', [\App\Http\Controllers\CareerController::class, 'index'])->name('careers.index');
+    Route::get('/careers/create', [\App\Http\Controllers\CareerController::class, 'create'])->name('careers.create');
+    Route::post('/careers', [\App\Http\Controllers\CareerController::class, 'store'])->name('careers.store');
+    Route::get('/careers/edit/{id}', [\App\Http\Controllers\CareerController::class, 'edit'])->name('careers.edit');
+    Route::post('/careers/update/{id}', [\App\Http\Controllers\CareerController::class, 'update'])->name('careers.update');
+    Route::get('/careers/delete/{id}', [\App\Http\Controllers\CareerController::class, 'destroy'])->name('careers.destroy');
+    
 });
 
 require __DIR__.'/auth.php';

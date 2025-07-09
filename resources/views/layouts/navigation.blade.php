@@ -50,6 +50,16 @@
                 </div>
                 @endcan
 
+                @can('view jobs')
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('careers.index')" :active="request()->routeIs('careers.index')">
+                        {{ __('Jobs') }}
+                    </x-nav-link>
+                    
+                </div>
+                @endcan
+                
+
                  @can('view users')               
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">

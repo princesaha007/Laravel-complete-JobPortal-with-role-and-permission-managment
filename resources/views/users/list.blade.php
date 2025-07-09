@@ -17,16 +17,16 @@
         <a href="{{ route('users.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md mb-4">Create user</a>
         <!-- @endcan  -->
 
-        
 
+<!-- search form -->
   <form class="mt-5" action="{{ route('users.search') }}" method="GET">
     {{-- Name or keyword search --}}
     <input
         type="search"
-        name="search"
+        name="name"
         id="search"
         placeholder="Search by name..."
-        value="{{ old('search', request('search')) }}"
+        value="{{ old('name', request('name')) }}"
         class="border border-gray-300 rounded-md px-4 py-2 mb-4 w-full max-w-md"
     >
 

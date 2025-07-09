@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             'view roles', 'create roles', 'edit roles', 'delete roles',
             'view permissions', 'create permissions', 'edit permissions', 'delete permissions',
             'view articles', 'create articles', 'edit articles', 'delete articles',
+            'view jobs', 'create jobs', 'edit jobs', 'delete jobs',
             // Add more if needed
         ];
 
