@@ -19,21 +19,21 @@
             </style>
         @endif
     </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
+ <body class="bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 min-h-screen p-6">
+        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden mx-auto flex items-center justify-center gap-4">
             @if (Route::has('login'))
                 <nav class="flex items-center justify-end gap-4">
                     @auth
                         <a
                             href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-white dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal bg-green-400"
+                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-white dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-400 font-bold hover:bg-via-purple-800 transition-colors duration-300"
                         >
                             Dashboard
                         </a>
                     @else
                         <a
                             href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-white border border-transparent hover:border-[#fdfcf935] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal bg-green-400"
+                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-white border border-transparent hover:border-[#fdfcf935] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-400 font-bold hover:bg-via-purple-800 transition-colors duration-300"
                         >
                             Log in
                         </a>
@@ -41,7 +41,8 @@
                         @if (Route::has('register'))
                             <a
                                 href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-white dark:border-[#ffffff] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal bg-green-500">
+                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-white border border-transparent hover:border-[#fdfcf935] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 font-bold hover:bg-via-purple-800 transition-colors duration-300"
+                            >
                                 Register
                             </a>
                         @endif
@@ -51,12 +52,35 @@
         </header>
         <div>
             <!-- here can add body content -->
-            <div class="flex flex-col items-center justify-center">
-                <h1 class="text-3xl lg:text-5xl font-bold mb-4 text-center text-green-400">
-                    Welcome to Laravel Role Manager
-                </h1>
-                <p class="text-lg lg
-        </div>
+             <main class="container mx-auto min-h-[90vh] grid place-items-center">
+    <section class="max-w-6xl w-full bg-white bg-opacity-10 backdrop-blur-md rounded-3xl shadow-2xl flex flex-col md:flex-row items-center md:items-start gap-10 p-10 md:p-16 border border-white/20">
+      
+      <!-- Left Text -->
+      <div class="flex-1 text-center md:text-left space-y-6">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight drop-shadow-lg">
+          Manage Your Roles<br />
+          <span class="text-pink-400">With Confidence</span>
+        </h1>
+        <p class="text-base sm:text-lg md:text-xl text-indigo-200 max-w-xl leading-relaxed drop-shadow-sm">
+          Simplify user roles and permissions management with an elegant, intuitive system that gives you control and peace of mind.
+        </p>
+        <a href="{{ route('login') }}"
+           class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg transition-all duration-300">
+          Get Started
+        </a>
+      </div>
+
+      <!-- Right Image -->
+      <div class="flex-1 w-full max-w-md">
+        <img 
+          src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1c806140-f354-4dce-b822-466aa6f0e6a3.png" 
+          alt="User roles dashboard illustration" 
+          class="rounded-2xl shadow-2xl object-cover w-full h-auto transition-transform duration-500 hover:scale-105"
+          onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/30981144-2224-482c-9990-ec268fd94689.png';"
+        />
+      </div>
+    </section>
+  </main>
 
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
