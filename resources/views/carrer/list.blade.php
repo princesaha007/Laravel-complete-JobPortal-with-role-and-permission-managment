@@ -16,11 +16,63 @@
 
        <div>
 
-
+        @can('create jobs')
        <a href="{{ route('careers.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 ">Create Job</a>
-
+       @endcan
 
        </div>
+
+<!-- search form -->
+        <!-- search form -->
+  <form class="mt-5" action="{{ route('careers.search') }}" method="GET">
+    {{-- Name or keyword search --}}
+    <input
+        type="search"
+        name="job_title"
+        id="search"
+        placeholder="Search by job title..."
+        value="{{ old('job_title', request('job_title')) }}"
+        class="border border-gray-300 rounded-md px-4 py-2 mb-4 w-full max-w-md"
+    >
+
+    {{-- Job category filter --}}
+    <select
+        name="job_category"
+        id="job_category"
+        class="border border-gray-300 rounded-md px-4 py-2 mb-4 w-full max-w-md"
+    >
+        <option value="">All Categories</option>
+        @foreach($careers as $career)
+            <option
+                value="{{ $career->job_category }}"
+                {{ request('job_category') == $career->job_category ? 'selected' : '' }}
+            >
+                {{ ucfirst($career->job_category) }}
+            </option>
+        @endforeach
+    </select>
+
+
+
+    <input
+        type="submit"
+        value="Search"
+        class="bg-blue-500 text-white px-4 py-2 rounded-md"
+    >
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-7">
 <div class="">
 
@@ -69,6 +121,12 @@
                                 @can('delete jobs')
                                 <a href="{{route('careers.destroy', $career->id)}}" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs inline-block">
                                     Delete
+                                </a>
+                                @endcan
+                                
+                                @can('view jobs')
+                                <a href="{{ route('careers.show', $career->id) }}" class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs inline-block">
+                                    View
                                 </a>
                                 @endcan
 

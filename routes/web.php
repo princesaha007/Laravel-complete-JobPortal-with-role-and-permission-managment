@@ -65,6 +65,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/careers/edit/{id}', [\App\Http\Controllers\CareerController::class, 'edit'])->name('careers.edit');
     Route::post('/careers/update/{id}', [\App\Http\Controllers\CareerController::class, 'update'])->name('careers.update');
     Route::get('/careers/delete/{id}', [\App\Http\Controllers\CareerController::class, 'destroy'])->name('careers.destroy');
+    Route::get('/careers/show/{id}', [\App\Http\Controllers\CareerController::class, 'show'])->name('careers.show');
+
+    // Search Careers
+    Route::get('/careers/search', [\App\Http\Controllers\CareerController::class, 'search'])->name('careers.search');
     
 });
 

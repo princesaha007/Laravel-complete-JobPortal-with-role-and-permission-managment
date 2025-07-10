@@ -28,9 +28,13 @@ class CareerController extends Controller
         $careers = Career::latest()->paginate(10);
     } 
     // Otherwise, show only jobs created by this user
-    else {
+    elseif ($user->hasRole('Employer')) {
         $careers = Career::where('created_by', $user->id)->latest()->paginate(10);
     }
+    // If user is a candidate, show all jobs
+    elseif ($user->hasRole('candidate')) {
+        $careers = Career::latest()->paginate(10);
+    }   
 
     return view('carrer.list', compact('careers'));
 }
@@ -89,7 +93,14 @@ class CareerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $career = Career::findOrFail($id);
+
+        // Check if the user has permission to view the job
+        if (Auth::user()->can('view jobs')) {
+            return view('carrer.view', ['career' => $career]);
+        } else {
+            return redirect()->route('careers.index')->with('error', 'You do not have permission to view this job.');
+        }
     }
 
     /**
@@ -149,4 +160,31 @@ class CareerController extends Controller
 
         return redirect()->route('careers.index')->with('success', 'Job deleted successfully.');
     }
+
+
+public function search(Request $request)
+{
+    $job_title = $request->job_title;
+    $job_category = $request->job_category;
+
+    // Build query
+    $query = Career::query();
+
+    if ($job_title) {
+        $query->where('job_title', 'LIKE', '%' . $job_title . '%');
+    }
+
+    if ($job_category) {
+        $query->where('job_category', 'LIKE', '%' . $job_category . '%');
+    }
+
+    $careers = $query->paginate(5)->withQueryString();
+
+    if ($careers->isEmpty()) {
+        return redirect()->route('careers.index')->with('error', 'No careers found');
+    }
+
+    return view('carrer.list', compact('careers')); 
+}
+
 }
