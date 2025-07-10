@@ -19,21 +19,21 @@
             </style>
         @endif
     </head>
- <body class="bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 min-h-screen p-6">
-        <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden mx-auto flex items-center justify-center gap-4">
+ <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
+          <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
             @if (Route::has('login'))
                 <nav class="flex items-center justify-end gap-4">
                     @auth
                         <a
                             href="{{ url('/dashboard') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-white dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-400 font-bold hover:bg-via-purple-800 transition-colors duration-300"
+                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-white dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-400 font-bold hover:bg-via-purple-800 transition-colors duration-300"
                         >
                             Dashboard
                         </a>
                     @else
                         <a
                             href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-white border border-transparent hover:border-[#fdfcf935] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal bg-gradient-to-r from-indigo-900 via-purple-800 to-pink-400 font-bold hover:bg-via-purple-800 transition-colors duration-300"
+                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-white border border-transparent hover:border-[#fdfcf935] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-00 font-bold hover:bg-via-purple-800 transition-colors duration-300"
                         >
                             Log in
                         </a>
@@ -52,35 +52,149 @@
         </header>
         <div>
             <!-- here can add body content -->
-             <main class="container mx-auto min-h-[90vh] grid place-items-center">
-    <section class="max-w-6xl w-full bg-white bg-opacity-10 backdrop-blur-md rounded-3xl shadow-2xl flex flex-col md:flex-row items-center md:items-start gap-10 p-10 md:p-16 border border-white/20">
-      
-      <!-- Left Text -->
-      <div class="flex-1 text-center md:text-left space-y-6">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight drop-shadow-lg">
-          Manage Your Roles<br />
-          <span class="text-pink-400">With Confidence</span>
-        </h1>
-        <p class="text-base sm:text-lg md:text-xl text-indigo-200 max-w-xl leading-relaxed drop-shadow-sm">
-          Simplify user roles and permissions management with an elegant, intuitive system that gives you control and peace of mind.
-        </p>
-        <a href="{{ route('login') }}"
-           class="inline-block bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-8 rounded-xl shadow-lg transition-all duration-300">
-          Get Started
-        </a>
-      </div>
-
-      <!-- Right Image -->
-      <div class="flex-1 w-full max-w-md">
-        <img 
-          src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1c806140-f354-4dce-b822-466aa6f0e6a3.png" 
-          alt="User roles dashboard illustration" 
-          class="rounded-2xl shadow-2xl object-cover w-full h-auto transition-transform duration-500 hover:scale-105"
-          onerror="this.onerror=null;this.src='https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/30981144-2224-482c-9990-ec268fd94689.png';"
-        />
-      </div>
-    </section>
-  </main>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Role Management System</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #93c5fd;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+       
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+       
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+       
+        header {
+            margin-bottom: 3rem;
+        }
+       
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+       
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 600px;
+        }
+       
+        .dashboard-image {
+            margin: 2rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+       
+        .dashboard-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+       
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+       
+        .feature-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+       
+        .feature-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+       
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--gray);
+            font-size: 0.875rem;
+        }
+       
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.25rem;
+            }
+           
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1> Role-Permission Management</h1>
+            <p class="subtitle">Streamline access control with our intuitive permission system designed for modern teams.</p>
+        </header>
+       
+        <div class="dashboard-image">
+            <img
+                src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9f749874-1f3e-4ef7-b56b-a40b5a30205f.png"
+                alt="Modern role management dashboard interface showing user permissions matrix. Screen has a clean white UI with accent colors, showing a hierarchical tree of roles on the left and permission checkboxes on the right."
+            />
+        </div>
+       
+        <div class="features">
+            <div class="feature-item">
+                <h3>Granular Permissions</h3>
+                <p>Define precise access levels for every role within your organization.</p>
+            </div>
+           
+            <div class="feature-item">
+                <h3>Hierarchical Structure</h3>
+                <p>Nest roles effortlessly while inheriting permissions automatically.</p>
+            </div>
+           
+            <div class="feature-item">
+                <h3>Easy Administration</h3>
+                <p>Manage access rights without technical expertise through intuitive UI.</p>
+            </div>
+        </div>
+    </div>
+   
+    <footer>
+        <p>©2025 Role-Permission Management System. All rights reserved.</p>
+    </footer>
+             
 
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
