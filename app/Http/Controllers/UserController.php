@@ -48,12 +48,12 @@ class UserController extends Controller
             'name' => 'required|min:3',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|same:confirm_password',
-            'confirm_password' => 'required'
+            'confirm_password' => 'required' 
 
         ]);
 
         if ($validated){
-
+ 
             $user= new User();
             $user->name = $request->name;
             $user->email = $request -> email;

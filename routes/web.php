@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\ProfileController;
-use Spatie\Permission\Contracts\Permission;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ProfileController;
+use Spatie\Permission\Contracts\Permission;
+use App\Http\Controllers\AppliedJobController;
+use App\Http\Controllers\PermissionController;
 
 
 Route::get('/', function () {
@@ -69,7 +70,14 @@ Route::middleware('auth')->group(function () {
 
     // Search Careers
     Route::get('/careers/search', [\App\Http\Controllers\CareerController::class, 'search'])->name('careers.search');
-    
+
+    // Applied Jobs Routes
+    Route::get('/careers/applied', [\App\Http\Controllers\AppliedJobController::class, 'index'])->name('applied.jobs.index');
+    Route::get('/careers/apply/{id}', [\App\Http\Controllers\AppliedJobController::class, 'apply'])->name('careers.apply');
+    Route::post('/careers/apply/store/{id}', [\App\Http\Controllers\AppliedJobController::class, 'store'])->name('careers.apply.store');
+
+    Route::get('/applied/candidates/{id}', [\App\Http\Controllers\AplicantsController::class, 'appliedCandidateShow'])->name('applied.candidates.show');
+
 });
 
 require __DIR__.'/auth.php';

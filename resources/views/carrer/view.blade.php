@@ -6,7 +6,7 @@
             </h2>
 
             <a href="{{ route('careers.index') }}"
-               class="px-6 py-2 text-black bg-gray-600 rounded-lg hover:bg-green-700 transition">
+               class="px-6 py-2 text-white bg-blue-600 rounded-lg hover:bg-green-300 transition">
                 Back to List
             </a>
         </div>
@@ -93,6 +93,12 @@
                         {!! nl2br(e($career->job_description)) ?? 'No description provided.' !!}
                     </div>
                 </div>
+            </div>
+
+@can('apply jobs')
+<a href="{{ route('careers.apply' , $career->id) }}" class="bg-green-500 text-white px-4 py-2 rounded-md mb-4 ">Apply Now</a>
+@endcan
+
             </div>
         </div>
     </div>

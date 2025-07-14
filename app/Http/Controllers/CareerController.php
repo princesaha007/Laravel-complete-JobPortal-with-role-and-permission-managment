@@ -29,7 +29,9 @@ class CareerController extends Controller
     } 
     // Otherwise, show only jobs created by this user
     elseif ($user->hasRole('Employer')) {
-        $careers = Career::where('created_by', $user->id)->latest()->paginate(10);
+
+        // $careers = Career::where('created_by', $user->id)->latest()->paginate(10);
+         $careers = $user->careers()->latest()->get();
     }
     // If user is a candidate, show all jobs
     elseif ($user->hasRole('candidate')) {
@@ -94,9 +96,9 @@ class CareerController extends Controller
     public function show(string $id)
     {
         $career = Career::findOrFail($id);
-
+        $user = Auth::user();
         // Check if the user has permission to view the job
-        if (Auth::user()->can('view jobs')) {
+        if ($user->can('view jobs')) {
             return view('carrer.view', ['career' => $career]);
         } else {
             return redirect()->route('careers.index')->with('error', 'You do not have permission to view this job.');
@@ -186,5 +188,7 @@ public function search(Request $request)
 
     return view('carrer.list', compact('careers')); 
 }
+
+
 
 }

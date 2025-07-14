@@ -20,6 +20,10 @@
        <a href="{{ route('careers.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 ">Create Job</a>
        @endcan
 
+       @role('candidate')
+       <a href="{{ route('applied.jobs.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md mb-4 ">My Applied Jobs</a>
+       @endrole
+
        </div>
 
 <!-- search form -->
@@ -129,6 +133,12 @@
                                     View
                                 </a>
                                 @endcan
+
+                                @role('Employer|superadmin')
+                                    <a href="{{ route('applied.candidates.show', $career->id) }}" class="bg-green-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-xs inline-block">
+                                    Applicants
+                                </a>
+                                @endrole
 
                             </div>
                         </td>

@@ -47,4 +47,22 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    
+    public function careers()
+    {
+        return $this->hasMany(Career::class, 'created_by');
+    }
+
+
+
+    
+    public function appliedJobs()
+    {
+
+          return $this->hasMany(AppliedJob::class, 'user_id');
+
+    }
+
+
 }
