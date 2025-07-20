@@ -41,7 +41,7 @@
     <input type="checkbox"
            name="permissions[]"
            value="{{ $permission->name }}"
-           @if($ourHasPermissions->contains($permission->name)) checked @endif
+           @if($ourHasPermi ssions->contains($permission->name)) checked @endif
            class="mr-2">
     <label class="text-gray-700">{{ $permission->name }}</label>
 @endforeach
