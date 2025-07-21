@@ -76,7 +76,6 @@ class CareerController extends Controller
             $career->skill_requirement = $request->skill_requirement;
             $career->educational_requirements = $request->educational_requirements;
             $career->experience_requirements = $request->experience_requirements;
-           
             $career->salary = $request->salary;
 
             $career->created_by = Auth::user()->id;

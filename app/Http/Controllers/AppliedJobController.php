@@ -76,8 +76,9 @@ class AppliedJobController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'cv_path' => $cvPath,
-             'user_id' => $user->id , // ✅ Store user ID
-        ]);
+            'user_id' => $user->id, // ✅ Store user ID
+            'career_id' => $career->id, // ✅ Store career ID
+        ])->save();
 
         return redirect()->route('applied.jobs.index')->with('success', 'Application submitted successfully.');
     }
