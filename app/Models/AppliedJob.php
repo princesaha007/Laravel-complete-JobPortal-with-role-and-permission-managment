@@ -8,10 +8,10 @@ class AppliedJob extends Model
 {
     protected $fillable = ['user_id', 'career_id', 'name', 'email', 'cv_path'];
 
-    // public function career()
-    // {
-    //     return $this->belongsTo(Career::class, 'career_id' );
-    // }
+    public function career()
+    {
+        return $this->belongsTo(Career::class, 'career_id' );
+    }
 
     // public function user()
     // {

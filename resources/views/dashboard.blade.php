@@ -109,4 +109,70 @@
         </table>
     </div>
     @endrole
+
+    @role('Employer')
+    <div class="bg-white mt-8 p-6 rounded shadow">
+                <h3 class="text-lg font-bold mb-4">Job Category Chart</h3>
+                <div id="container" style="width: 100%; height: 400px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Highcharts CDN -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <!-- Chart Script -->
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+       
+            const categories = @json($categoriesByEmployer);
+            const counts = @json($appliedJobsCounts);
+
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Job Graph by Category'
+                },
+                subtitle: {
+                    text: 'Source: Careers Table'
+                },
+                xAxis: {
+                    categories: categories,
+                    crosshair: true,
+                    accessibility: {
+                        description: 'Job Categories'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Number of Applications'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' applications'
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Applications',
+                    colorByPoint: true,
+                    data: counts.map((count, index) => ({
+                        y: count,
+                        color: Highcharts.getOptions().colors[index % Highcharts.getOptions().colors.length]
+                    }))
+                }]
+            });
+        });
+    </script>
+    @endrole
 </x-app-layout>
