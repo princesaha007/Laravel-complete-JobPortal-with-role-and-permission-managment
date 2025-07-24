@@ -20,8 +20,7 @@ class DashboardController extends Controller
         // Separate labels and values for the chart
         $categories = $jobData->pluck('job_category')->toArray();
         $counts = $jobData->pluck('total')->toArray();
-
-        $careers = Career::latest()->get();
+        $careers = Career::latest()->paginate(6);
 
         //job category by the employer x-axis & applied jobs count by the candidates y-axis
         $categoriesByEmployer = [];
@@ -39,6 +38,7 @@ class DashboardController extends Controller
                 $appliedJobsCounts[] = $count;
             }
         }
+
 
         return view('dashboard', compact('categories', 'counts', 'careers', 'categoriesByEmployer', 'appliedJobsCounts'));
     }

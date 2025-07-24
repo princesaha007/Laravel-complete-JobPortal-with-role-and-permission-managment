@@ -50,7 +50,7 @@
  
     <button type="submit"
         class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-3 rounded-md text-sm">
-        Create
+        Submit Application
     </button>
 </form>
 

@@ -108,6 +108,9 @@
             </tbody>
         </table>
     </div>
+  <div class="mt-6 flex justify-center items-center mx-7">
+    {{ $careers->links() }}
+</div>
     @endrole
 
     @role('Employer')
@@ -175,4 +178,11 @@
         });
     </script>
     @endrole
+     @role('candidate')
+      <a href="{{ route('applied.jobs.index') }}" 
+   class="bg-blue-500 text-white px-6 py-3 rounded-md  mt-10 mb-6 inline-block">
+   My Applied Jobs
+</a>
+       @endrole
+
 </x-app-layout>
